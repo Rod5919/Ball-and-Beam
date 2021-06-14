@@ -1,4 +1,4 @@
 # Ball-and-Beam
-> Authors:
-Jaime Condori
+> Authors:  
+Jaime Condori  
 Sergio Fernandez
