@@ -32,14 +32,8 @@ Q =  [1 0 0 0;
       0 1 0 0;
       0 0 1 0;
       0 0 0 1]; % Más rápido a cambio de gastar más energía 
-Qext =[1 0 0 0 0; 
-       0 1 0 0 0;
-       0 0 1 0 0;
-       0 0 0 1 0;
-       0 0 0 0 5]; %Más rápido a cambio de gastar más energía 
-   
 R = 0.0001; % Ahorrar energía a cambio de que sea más lento
-[sysob_lqr, sysob_cl_lqr, sysobext_lqr, K_lqr, Kp_lqr, Kext_lqr, L_lqr] = mylqr(A,B,C,D,Q,Qext,R);
+[sysob_lqr, sysob_cl_lqr, sysobext_lqr, K_lqr, Kp_lqr, Kext_lqr, L_lqr] = mylqr(A,B,C,D,Q,Q_ext,R);
 
 %% Stepinfo
 % disp('sys1')
