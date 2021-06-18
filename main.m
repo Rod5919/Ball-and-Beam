@@ -46,7 +46,7 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 
 
 % Stepinfo
-%$ State space
+%% State space
 disp('State space without control')
 stepinfo(out.sys1.Data, out.sys1.time)
 disp()
