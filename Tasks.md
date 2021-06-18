@@ -24,3 +24,9 @@
 |Simulink|Completado|Cocas|
 |Inserteza paramétrica|Pendiente|Cocas|
 |Perturbaciones|Pendiente|Rodri|
+
+## Explicacion
+
+1. Pole placement
+2. Itae
+3. LQR
