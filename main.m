@@ -65,7 +65,7 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 % Stepinfo
 %% State space
 disp('State space without control')
-stepinfo(sys)
+step((L/2)*sys)
 disp('')
 
 %% Pole placement
