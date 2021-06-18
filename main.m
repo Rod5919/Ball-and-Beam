@@ -27,7 +27,6 @@ sys = ss(A,B,C,D);
 %% First control method
 [sysobs_pole, sysobs_cl_pole, sysobsext_pole, K_pole, Kp_pole, Kext_pole, L_pole] = pole_placement(A,B,C,D);
 
-
 %% Second control method
 Q =  [1 0 0 0; 
 0 1 0 0;
