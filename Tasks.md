@@ -20,7 +20,7 @@
 |-----|------|---------|
 |Función itae|Completado|Rodri|
 |Función LQR|Pendiente|Cocas|
-|main|Pendiente|Rodri|
+|main|Completado|Rodri|
 |Simulink|Completado|Cocas|
 |Inserteza paramétrica|Pendiente|Cocas|
 |Perturbaciones|Pendiente|Rodri|
