@@ -14,6 +14,23 @@ n_motor = 0.69;
 n_gearbox = 0.85;
 n_total = n_motor + n_gearbox;
 
+%% Ball and Beam Plant + IP
+% g = 9.8*1.05;
+% mb = 0.65*1.05; 
+% R = 0.0254*1.05;
+% L = 0.425*1.05;
+% d = 0.12*1.05;
+% delta_2 = 0.2*1.05;
+% Km = 0.00767*1.05;
+% Ki = 0.00767*1.05;
+% Kg = 14*1.05;
+% Rm = 2.6*1.05;
+% Jb = 0.5*1.05;
+% n_motor = 0.69*1.05;
+% n_gearbox = 0.85*1.05;
+% n_total = n_motor + n_gearbox;
+
+%% State space
 A = [0 0 1 0 ; 
     0 0 0 1 ; 
     0 -(mb*Jb*g+mb^2*g*delta_2^2)/(Jb + mb*delta_2^2)^2 -(Kg^2*Ki*Km*n_total)/(Rm*(Jb + mb*delta_2^2)*(L^2)/(d^2)) 0 ;
@@ -48,47 +65,47 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 % Stepinfo
 %% State space
 disp('State space without control')
-stepinfo(out.sys1.Data, out.sys1.time)
-disp()
+stepinfo(sys)
+disp('')
 
 %% Pole placement
 disp('--------Pole placement--------')
 disp('State Space for the 1st observer')
 stepinfo(out.sysob_pole.Data, out.sysob_pole.time)
-disp()
+disp('')
 
 disp('Control + Observer')
 stepinfo(out.sysob_cl_pole.Data, out.sysob_cl_pole.time)
-disp()
+disp('')
 
 disp('Control + Observer + integral error')
 stepinfo(out.sysobext_pole.Data, out.sysobext_pole.time)
-disp()
+disp('')
 
 %% ITAE
 disp('-------------ITAE-------------')
 disp('State Space for the 1st observer')
 stepinfo(out.sysob_itae.Data, out.sysob_itae.time)
-disp()
+disp('')
 
 disp('Control + Observer')
 stepinfo(out.sysob_cl_itae.Data, out.sysob_cl_itae.time)
-disp()
+disp('')
 
 disp('Control + Observer + integral error')
 stepinfo(out.sysobext_itae.Data, out.sysobext_itae.time)
-disp()
+disp('')
 
 %% LQR
 disp('-------------LQR-------------')
 disp('State Space for the 1st observer')
 stepinfo(out.sysob_lqr.Data, out.sysob_lqr.time)
-disp()
+disp('')
 
 disp('Control + Observer')
 stepinfo(out.sysob_cl_lqr.Data, out.sysob_cl_lqr.time)
-disp()
+disp('')
 
 disp('Control + Observer + integral error')
 stepinfo(out.sysobext_lqr.Data, out.sysobext_lqr.time)
-disp()
+disp('')
