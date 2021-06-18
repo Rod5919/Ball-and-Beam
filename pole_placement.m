@@ -56,7 +56,7 @@ function [sysobs, sysobs_cl, sysobsext, K, Kp, Kext, L] = pole_placement(A,B,C,D
     Dobcl1 = [1 0];
     sysobs_cl = ss(Aobcl1,Bobcl1,Cobcl1,Dobcl1);
 
-    %Control + Observer + integral error
+    % Control + Observer + integral error
     K11 = Kext_1(1:rank(A));
     Ke = Kext_1(rank(A)+1);
     Aobcl_1 = [Aob1-B*K11+L1*D*K11 -B*Ke ; zeros(1,n) 0];

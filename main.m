@@ -28,6 +28,9 @@ sys = ss(A,B,C,D);
 [sysob_pole, sysob_cl_pole, sysobext_pole, K_pole, Kp_pole, Kext_pole, L_pole] = pole_placement(A,B,C,D);
 
 %% Second control method
+[sysob_itae, sysob_cl_itae, sysobext_itae, K_itae, Kp_itae, Kext_itae, L_itae] = itae(A,B,C,D);
+
+%% Third control method
 Q =  [1 0 0 0; 
 0 1 0 0;
 0 0 1 0;
@@ -41,38 +44,37 @@ Qext =[1 0 0 0 0;
 R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 [sysob_lqr, sysob_cl_lqr, sysobext_lqr, K_lqr, Kp_lqr, Kext_lqr, L_lqr] = mylqr(A,B,C,D,Q,Qext,R);
 
-%% Third control method
-[sysob_itae, sysob_cl_itae, sysobext_itae, K_itae, Kp_itae, Kext_itae, L_itae] = itae(A,B,C,D);
 
-%% Stepinfo
-% disp('sys1')
-% stepinfo(out.sys1.Data, out.sys1.time)
-% disp()
-% 
-% disp('syso1')
-% stepinfo(out.syso1.Data, out.syso1.time)
-% disp()
-% 
-% disp('sysco1')
-% stepinfo(out.sysco1.Data, out.sysco1.time)
-% disp()
-% 
-% disp('syscoi1')
-% stepinfo(out.syscoi1.Data, out.syscoi1.time)
-% disp()
-% 
-% disp('sys2')
-% stepinfo(out.sys2.Data, out.sys2.time)
-% disp()
-% 
-% disp('syso2')
-% stepinfo(out.syso2.Data, out.syso2.time)
-% disp()
-% 
-% disp('sysco2')
-% stepinfo(out.sysco2.Data, out.sysco2.time)
-% disp()
-% 
-% disp('syscoi2')
-% stepinfo(out.syscoi2.Data, out.syscoi2.time)
-% disp()
+% Stepinfo
+%$ State space
+disp('State space without control')
+stepinfo(out.sys1.Data, out.sys1.time)
+disp()
+
+%% Pole placement
+disp('--------Pole placement--------')
+disp('State Space for the 1st observer')
+stepinfo(out.sysob_pole.Data, out.sysob_pole.time)
+disp()
+
+disp('Control + Observer')
+stepinfo(out.sysob_cl_pole.Data, out.sysob_cl_pole.time)
+disp()
+
+disp('Control + Observer + integral error')
+stepinfo(out.sysobext_pole.Data, out.sysobext_pole.time)
+disp()
+
+%% ITAE
+disp('-------------ITAE-------------')
+disp('State Space for the 1st observer')
+stepinfo(out.sysob_itae.Data, out.sysob_itae.time)
+disp()
+
+disp('Control + Observer')
+stepinfo(out.sysob_cl_itae.Data, out.sysob_cl_itae.time)
+disp()
+
+disp('Control + Observer + integral error')
+stepinfo(out.sysobext_itae.Data, out.sysobext_itae.time)
+disp()
