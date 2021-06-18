@@ -48,47 +48,47 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 % Stepinfo
 %% State space
 disp('State space without control')
-stepinfo(out.sys1.Data, out.sys1.time)
-disp()
+stepinfo(sys)
+disp("")
 
 %% Pole placement
 disp('--------Pole placement--------')
 disp('State Space for the 1st observer')
 stepinfo(out.sysob_pole.Data, out.sysob_pole.time)
-disp()
+disp("")
 
 disp('Control + Observer')
 stepinfo(out.sysob_cl_pole.Data, out.sysob_cl_pole.time)
-disp()
+disp("")
 
 disp('Control + Observer + integral error')
 stepinfo(out.sysobext_pole.Data, out.sysobext_pole.time)
-disp()
+disp("")
 
 %% ITAE
 disp('-------------ITAE-------------')
 disp('State Space for the 1st observer')
 stepinfo(out.sysob_itae.Data, out.sysob_itae.time)
-disp()
+disp("")
 
 disp('Control + Observer')
 stepinfo(out.sysob_cl_itae.Data, out.sysob_cl_itae.time)
-disp()
+disp("")
 
 disp('Control + Observer + integral error')
 stepinfo(out.sysobext_itae.Data, out.sysobext_itae.time)
-disp()
+disp("")
 
 %% LQR
 disp('-------------LQR-------------')
 disp('State Space for the 1st observer')
 stepinfo(out.sysob_lqr.Data, out.sysob_lqr.time)
-disp()
+disp("")
 
 disp('Control + Observer')
 stepinfo(out.sysob_cl_lqr.Data, out.sysob_cl_lqr.time)
-disp()
+disp("")
 
 disp('Control + Observer + integral error')
 stepinfo(out.sysobext_lqr.Data, out.sysobext_lqr.time)
-disp()
+disp("")
