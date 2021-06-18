@@ -25,7 +25,7 @@ D = 0;
 sys = ss(A,B,C,D);
 
 %% First control method
-[sysobs_pole, sysobs_cl_pole, sysobsext_pole, K_pole, Kp_pole, Kext_pole, L_pole] = pole_placement(A,B,C,D);
+[sysob_pole, sysob_cl_pole, sysobext_pole, K_pole, Kp_pole, Kext_pole, L_pole] = pole_placement(A,B,C,D);
 
 %% Second control method
 Q =  [1 0 0 0; 
@@ -42,7 +42,7 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 [sysob_lqr, sysob_cl_lqr, sysobext_lqr, K_lqr, Kp_lqr, Kext_lqr, L_lqr] = mylqr(A,B,C,D,Q,Qext,R);
 
 %% Third control method
-[sysobs_itae, sysobs_cl_itae, sysobsext_itae, K_itae, Kp_itae, Kext_itae, L_itae] = itae(A,B,C,D);
+[sysob_itae, sysob_cl_itae, sysobext_itae, K_itae, Kp_itae, Kext_itae, L_itae] = itae(A,B,C,D);
 
 %% Stepinfo
 % disp('sys1')
