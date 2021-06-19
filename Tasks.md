@@ -19,11 +19,11 @@
 |Tarea|Estado|Encargado|
 |-----|------|---------|
 |Función itae|Completado|Rodri|
-|Función LQR|Pendiente|Cocas|
+|Función LQR|Completado|Cocas|
 |main|Completado|Rodri|
 |Simulink|Completado|Cocas|
-|Inserteza paramétrica|Pendiente|Cocas|
-|Perturbaciones|Pendiente|Rodri|
+|Inserteza paramétrica|Completado|Cocas|
+|Perturbaciones|Completado|Rodri|
 
 ## Explicacion
 
