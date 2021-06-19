@@ -46,9 +46,8 @@ function [sysob, sysob_cl, sysobext, K, Kp, Kext, L] = mylqr(A,B,C,D,Q,Qext,R)
     Acl = A - B*K;
 
     poles = eig(Acl);
-
     % Gain for observers
-    L = place(A',C',[poles(1) poles(2) poles(3) poles(4)]);
+    L = place(A',C',[poles(1)*10 poles(2)*10 poles(3)*10 poles(4)*10]);
     L = L';
 
     % State Space for the 1st observer
