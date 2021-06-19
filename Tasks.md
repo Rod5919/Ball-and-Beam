@@ -4,8 +4,8 @@
 
 |Tarea|Estado|Encargado|
 |-----|------|---------|
-|Introducción y objetivos|Pendiente|Rodri|
-|Modelo de la plata y sus parámetros|Pendiente|Rodri|
+|Introducción y objetivos|Completado|Rodri|
+|Modelo de la planta y sus parámetros|Completado|Rodri|
 |Diseño del control (Técnica I) - Considerando la eliminación del error estático|Pendiente|Rodri|
 |Diseño del control (Técnica II) - Considerando la eliminación del error estático|Pendiente|Cocas|
 |Diseño del control (Técnica III) - Considerando la eliminación del error estático|Pendiente|Cocas|
