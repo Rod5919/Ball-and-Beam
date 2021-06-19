@@ -45,6 +45,8 @@ function [sysob, sysob_cl, sysobext, K, Kp, Kext, L] = mylqr(A,B,C,D,Q,Qext,R)
     % A with close loop
     Acl = A - B*K;
 
+%     poles = real(eig(Acl));
+
     poles = eig(Acl);
     % Gain for observers
     L = place(A',C',[poles(1)*10 poles(2)*10 poles(3)*10 poles(4)*10]);

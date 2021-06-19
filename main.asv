@@ -1,38 +1,4 @@
-%% Ball and Beam Plant
-g = 9.8; %Gravity acceleration
-mB = 0.064;
-mb = 0.65; 
-R = 0.0254;
-L = 0.425;
-d = 0.12;
-delta_2 = 0.2;
-Km = 0.00767;
-Ki = 0.00767;
-Kg = 14;
-Rm = 2.6;
-Jb = 0.5;
-n_motor = 0.69;
-n_gearbox = 0.85;
-n_total = n_motor + n_gearbox;
-
-%% Ball and Beam Plant + IP
-% g = 9.8*1.05;
-% mB = 0.064;
-% mb = 0.65*1.05; 
-% R = 0.0254*1.05;
-% L = 0.425*1.05;
-% d = 0.12*1.05;
-% delta_2 = 0.2*1.05;
-% Km = 0.00767*1.05;
-% Ki = 0.00767*1.05;
-% Kg = 14*1.05;
-% Rm = 2.6*1.05;
-% Jb = 0.5*1.05;
-% n_motor = 0.69*1.05;
-% n_gearbox = 0.85*1.05;
-% n_total = n_motor + n_gearbox;
-
-
+% %% Ball and Beam Plant
 g = 9.8; %Gravity acceleration
 m_B = 0.064;
 m_b = 0.65;
@@ -49,6 +15,8 @@ n_motor = 0.69;
 n_gearbox = 0.85;
 n_total = n_motor + n_gearbox;
 
+IP = 1.05; % Incerteza paramétrica
+
 %% Ball and Beam Plant
 A = [0 0 1 0 ; 
     0 0 0 1 ; 
@@ -57,6 +25,35 @@ A = [0 0 1 0 ;
 B = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+m_B*delta_2^2))*(L/d);0];
 C = [0 1 0 0];
 D = 0;
+
+%% Ball and Beam Plant
+gip = 9.8; %Gravity acceleration
+m_Bip = 0.064;
+m_bip = 0.65;
+R1ip = 0.0254;
+Lip = 0.425;
+dip = 0.12;
+delta_2ip = 0.2;
+Kmip = 0.00767;
+Kiip = 0.00767;
+Kgip = 14;
+Rmip = 2.6;
+Jbip = 0.5*m_bip*Lip^2;
+n_motorip = 0.69;
+n_gearboxip = 0.85;
+n_total = n_motorip + n_gearboxip;
+
+IP = 1.05; % Incerteza paramétrica
+
+%% Ball and Beam Plant IP
+Aip = [0 0 1 0 ; 
+    0 0 0 1 ; 
+    0 -(m_Bip*Jbip*gip+m_Bip^2*gip*delta_2ip^2)/(Jbip + m_Bip*delta_2ip^2)^2 -((Kgip^2*Kiip*Kmip*n_total)/(Rmip*(Jbip + m_Bip*delta_2ip^2))*(Lip^2)/(dip^2)) 0 ;
+    -(5*gip)/7 0 0 0];
+Bip = [0;0;(Kgip*Kiip*n_total)/(Rmip*(Jbip+m_Bip*delta_2ip^2))*(Lip/dip);0];
+Cip = [0 1 0 0];
+Dip = 0;
+
 
 sys = ss(A,B,C,D);
 
@@ -90,7 +87,7 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 % Stepinfo
 %% State space
 disp('State space without control')
-step((L/2)*sys)
+step((Lip/2)*sys)
 disp('')
 
 %% Pole placement

@@ -1,4 +1,4 @@
-%% Ball and Beam Plant
+% %% Ball and Beam Plant
 g = 9.8; %Gravity acceleration
 m_B = 0.064;
 m_b = 0.65;
@@ -24,14 +24,35 @@ B = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+m_B*delta_2^2))*(L/d);0];
 C = [0 1 0 0];
 D = 0;
 
+%% Ball and Beam Plant
+
+IP = 1.05; % Incerteza paramétrica
+
+gip = 9.8*IP; %Gravity acceleration
+m_Bip = 0.064*IP;
+m_bip = 0.65*IP;
+R1ip = 0.0254*IP;
+Lip = 0.425*IP;
+dip = 0.12*IP;
+delta_2ip = 0.2*IP;
+Kmip = 0.00767*IP;
+Kiip = 0.00767*IP;
+Kgip = 14*IP;
+Rmip = 2.6*IP;
+Jbip = 0.5*m_bip*Lip^2*IP;
+n_motorip = 0.69*IP;
+n_gearboxip = 0.85*IP;
+n_total = n_motorip + n_gearboxip;
+
+
 %% Ball and Beam Plant IP
-% Aip = [0 0 1 0 ; 
-%     0 0 0 1 ; 
-%     0 -(m_B*Jb*g+m_B^2*g*delta_2^2)/(Jb + m_B*delta_2^2)^2 -((Kg^2*Ki*Km*n_total)/(Rm*(Jb + m_B*delta_2^2))*(L^2)/(d^2)) 0 ;
-%     -(5*g)/7 0 0 0];
-% Bip = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+m_B*delta_2^2))*(L/d);0];
-% Cip = [0 1 0 0];
-% Dip = 0;
+Aip = [0 0 1 0 ; 
+    0 0 0 1 ; 
+    0 -(m_Bip*Jbip*gip+m_Bip^2*gip*delta_2ip^2)/(Jbip + m_Bip*delta_2ip^2)^2 -((Kgip^2*Kiip*Kmip*n_total)/(Rmip*(Jbip + m_Bip*delta_2ip^2))*(Lip^2)/(dip^2)) 0 ;
+    -(5*gip)/7 0 0 0];
+Bip = [0;0;(Kgip*Kiip*n_total)/(Rmip*(Jbip+m_Bip*delta_2ip^2))*(Lip/dip);0];
+Cip = [0 1 0 0];
+Dip = 0;
 
 
 sys = ss(A,B,C,D);
@@ -49,15 +70,15 @@ ct = ctrb(A,B);
 [sysob_itae, sysob_cl_itae, sysobext_itae, K_itae, Kp_itae, Kext_itae, L_itae] = itae(A,B,C,D);
 
 %% Third control method
-Q =  [1 0 0 0; 
+Q =  [100 0 0 0; 
 0 1 0 0;
 0 0 1 0;
 0 0 0 1]; % Más rápido a cambio de gastar más energía 
-Qext =[1 0 0 0 0; 
+Qext =[100 0 0 0 0; 
 0 1 0 0 0;
 0 0 1 0 0;
 0 0 0 1 0;
-0 0 0 0 5]; %Más rápido a cambio de gastar más energía 
+0 0 0 0 2]; %Más rápido a cambio de gastar más energía 
 
 R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 [sysob_lqr, sysob_cl_lqr, sysobext_lqr, K_lqr, Kp_lqr, Kext_lqr, L_lqr] = mylqr(A,B,C,D,Q,Qext,R);
@@ -66,7 +87,7 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 % Stepinfo
 %% State space
 disp('State space without control')
-step((L/2)*sys)
+step((Lip/2)*sys)
 disp('')
 
 %% Pole placement
