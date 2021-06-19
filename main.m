@@ -1,7 +1,8 @@
 %% Ball and Beam Plant
 g = 9.8; %Gravity acceleration
-mb = 0.65; 
-R = 0.0254;
+m_B = 0.064;
+m_b = 0.65;
+R1 = 0.0254;
 L = 0.425;
 d = 0.12;
 delta_2 = 0.2;
@@ -9,15 +10,16 @@ Km = 0.00767;
 Ki = 0.00767;
 Kg = 14;
 Rm = 2.6;
-Jb = 0.5;
+Jb = 0.5*m_b*L^2;
 n_motor = 0.69;
 n_gearbox = 0.85;
 n_total = n_motor + n_gearbox;
 
 %% Ball and Beam Plant + IP
 % g = 9.8*1.05;
-% mb = 0.65*1.05; 
-% R = 0.0254*1.05;
+% m_B = 0.064;
+% m_b = 0.65;
+% R1 = 0.0254*1.05;
 % L = 0.425*1.05;
 % d = 0.12*1.05;
 % delta_2 = 0.2*1.05;
@@ -30,14 +32,25 @@ n_total = n_motor + n_gearbox;
 % n_gearbox = 0.85*1.05;
 % n_total = n_motor + n_gearbox;
 
-%% State space
+
+%% Ball and Beam Plant
 A = [0 0 1 0 ; 
     0 0 0 1 ; 
-    0 -(mb*Jb*g+mb^2*g*delta_2^2)/(Jb + mb*delta_2^2)^2 -(Kg^2*Ki*Km*n_total)/(Rm*(Jb + mb*delta_2^2)*(L^2)/(d^2)) 0 ;
-    -5*g/7 0 0 0];
-B = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+mb*delta_2^2)*((L/d)));0];
+    0 -(m_B*Jb*g+m_B^2*g*delta_2^2)/(Jb + m_B*delta_2^2)^2 -((Kg^2*Ki*Km*n_total)/(Rm*(Jb + m_B*delta_2^2))*(L^2)/(d^2)) 0 ;
+    -(5*g)/7 0 0 0];
+B = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+m_B*delta_2^2))*(L/d);0];
 C = [0 1 0 0];
 D = 0;
+
+%% Ball and Beam Plant IP
+% Aip = [0 0 1 0 ; 
+%     0 0 0 1 ; 
+%     0 -(m_B*Jb*g+m_B^2*g*delta_2^2)/(Jb + m_B*delta_2^2)^2 -((Kg^2*Ki*Km*n_total)/(Rm*(Jb + m_B*delta_2^2))*(L^2)/(d^2)) 0 ;
+%     -(5*g)/7 0 0 0];
+% Bip = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+m_B*delta_2^2))*(L/d);0];
+% Cip = [0 1 0 0];
+% Dip = 0;
+
 
 sys = ss(A,B,C,D);
 
