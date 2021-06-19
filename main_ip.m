@@ -1,55 +1,55 @@
-%% Ball and Beam Plant
-g = 9.8; %Gravity acceleration
-mb = 0.65; 
-R = 0.0254;
-L = 0.425;
-d = 0.12;
-delta_2 = 0.2;
-Km = 0.00767;
-Ki = 0.00767;
-Kg = 14;
-Rm = 2.6;
-Jb = 0.5;
-n_motor = 0.69;
-n_gearbox = 0.85;
-n_total = n_motor + n_gearbox;
+%% Ball and Beam Plant + IP
+g_ip = 9.8*1.05;
+mb_ip = 0.65*1.05; 
+R_ip = 0.0254*1.05;
+L_ip = 0.425*1.05;
+d_ip = 0.12*1.05;
+delta_2_ip = 0.2*1.05;
+Km_ip = 0.00767*1.05;
+Ki_ip = 0.00767*1.05;
+Kg_ip = 14*1.05;
+Rm_ip = 2.6*1.05;
+Jb_ip = 0.5*1.05;
+n_motor_ip = 0.69*1.05;
+n_gearbox_ip = 0.85*1.05;
+n_total_ip = n_motor + n_gearbox;
 
 %% State space
-A = [0 0 1 0 ; 
+A_ip = [0 0 1 0 ; 
     0 0 0 1 ; 
     0 -(mb*Jb*g+mb^2*g*delta_2^2)/(Jb + mb*delta_2^2)^2 -(Kg^2*Ki*Km*n_total)/(Rm*(Jb + mb*delta_2^2)*(L^2)/(d^2)) 0 ;
     -5*g/7 0 0 0];
-B = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+mb*delta_2^2)*((L/d)));0];
-C = [0 1 0 0];
-D = 0;
+B_ip = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+mb*delta_2^2)*((L/d)));0];
+C_ip = [0 1 0 0];
+D_ip = 0;
 
-sys = ss(A,B,C,D);
+sys_ip = ss(A_ip,B_ip,C_ip,D_ip);
 
 %% Observability
-ov = obsv(A,C);
+ov_ip = obsv(A_ip,C_ip);
 
 %% Controllability
-ct = ctrb(A,B);
+ct_ip = ctrb(A_ip,B_ip);
 
 %% First control method
-[sysob_pole, sysob_cl_pole, sysobext_pole, K_pole, Kp_pole, Kext_pole, L_pole] = pole_placement(A,B,C,D);
+[sysob_pole_ip, sysob_cl_pole_ip, sysobext_pole_ip, K_pole_ip, Kp_pole_ip, Kext_pole_ip, L_pole_ip] = pole_placement(A_ip,B_ip,C_ip,D_ip);
 
 %% Second control method
-[sysob_itae, sysob_cl_itae, sysobext_itae, K_itae, Kp_itae, Kext_itae, L_itae] = itae(A,B,C,D);
+[sysob_itae_ip, sysob_cl_itae_ip, sysobext_itae_ip, K_itae_ip, Kp_itae_ip, Kext_itae_ip, L_itae_ip] = itae(A_ip,B_ip,C_ip,D_ip);
 
 %% Third control method
-Q =  [1 0 0 0; 
+Q_ip =  [1 0 0 0; 
 0 1 0 0;
 0 0 1 0;
 0 0 0 1]; % Más rápido a cambio de gastar más energía 
-Qext =[1 0 0 0 0; 
+Qext_ip =[1 0 0 0 0; 
 0 1 0 0 0;
 0 0 1 0 0;
 0 0 0 1 0;
 0 0 0 0 5]; %Más rápido a cambio de gastar más energía 
 
-R = 0.0001; % Ahorrar energía a cambio de que sea más lento
-[sysob_lqr, sysob_cl_lqr, sysobext_lqr, K_lqr, Kp_lqr, Kext_lqr, L_lqr] = mylqr(A,B,C,D,Q,Qext,R);
+R_ip = 0.0001; % Ahorrar energía a cambio de que sea más lento
+[sysob_lqr_ip, sysob_cl_lqr_ip, sysobext_lqr_ip, K_lqr_ip, Kp_lqr_ip, Kext_lqr_ip, L_lqr_ip] = mylqr(A_ip,B_ip,C_ip,D_ip,Q,Qext,R);
 
 
 % Stepinfo
