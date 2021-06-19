@@ -15,7 +15,6 @@ n_motor = 0.69;
 n_gearbox = 0.85;
 n_total = n_motor + n_gearbox;
 
-
 %% Ball and Beam Plant
 A = [0 0 1 0 ; 
     0 0 0 1 ; 
