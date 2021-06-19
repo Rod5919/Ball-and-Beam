@@ -42,10 +42,10 @@ D = 0;
 sys = ss(A,B,C,D);
 
 %% Observability
-ov = obsv(A,C);
+ov = obsv
 
 %% Controllability
-ct = ctrb(A,B);
+
 
 %% First control method
 [sysob_pole, sysob_cl_pole, sysobext_pole, K_pole, Kp_pole, Kext_pole, L_pole] = pole_placement(A,B,C,D);
