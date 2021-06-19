@@ -1,4 +1,4 @@
-# *Ball and Beam (Matlab R2020a)
+# **Ball and Beam (Matlab R2020a)**
 
 **Integrantes:**  
 Jaime Alejandro Condori Machaca  
