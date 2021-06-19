@@ -26,7 +26,7 @@ D = 0;
 
 %% Ball and Beam Plant
 
-IP = 1.05; % Incerteza paramétrica
+IP = 1.3; % Incerteza paramétrica
 
 gip = 9.8*IP; %Gravity acceleration
 m_Bip = 0.064*IP;
