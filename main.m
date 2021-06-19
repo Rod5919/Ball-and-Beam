@@ -24,7 +24,9 @@ B = [0;0;(Kg*Ki*n_total)/(Rm*(Jb+m_B*delta_2^2))*(L/d);0];
 C = [0 1 0 0];
 D = 0;
 
-%% Ball and Beam Plant
+sys = (A,B,C,D);
+
+%% Ball and Beam Plant + IP
 
 IP = 1.3; % Incerteza paramétrica
 
@@ -55,7 +57,7 @@ Cip = [0 1 0 0];
 Dip = 0;
 
 
-sys = ss(A,B,C,D);
+sysIP = ss(Aip,Bip,Cip,Dip);
 
 %% Observability
 ov = obsv(A,C);
@@ -87,7 +89,7 @@ R = 0.0001; % Ahorrar energía a cambio de que sea más lento
 % Stepinfo
 %% State space
 disp('State space without control')
-step((Lip/2)*sys)
+step((L/2)*sys)
 disp('')
 
 %% Pole placement
