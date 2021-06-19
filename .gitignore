@@ -1,3 +1,4 @@
+.gitignore
 *.slxc
 *.asv
 help*

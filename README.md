@@ -38,3 +38,20 @@ ts = 0.7[s]
 ~~~matlab
 Wn = 7
 ~~~
+
+> También se implemento el controlaor LQR, pero no se incluyó en el reporte, sus ganacias fueron:
+
+~~~matlab
+Q =  [100 0 0 0; 
+0 1 0 0;
+0 0 1 0;
+0 0 0 1];
+
+Qext =[100 0 0 0 0; 
+0 1 0 0 0;
+0 0 1 0 0;
+0 0 0 1 0;
+0 0 0 0 2];
+
+R = 0.0001;
+~~~
