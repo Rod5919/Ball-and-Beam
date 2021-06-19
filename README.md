@@ -1,7 +1,7 @@
 # *Ball and Beam (Matlab R2020a)
 
 **Integrantes:**  
-Jaime Alejandro Condori Machaca
+Jaime Alejandro Condori Machaca  
 Sergio Rodrigo Fernández Testa
 
 **Docente:**  
@@ -30,7 +30,7 @@ Ing. Alexis Andrade
 
 ~~~matlab
 OS = 4%
-ts = 0.7[s]_
+ts = 0.7[s]
 ~~~
 
 ### **ITAE**
